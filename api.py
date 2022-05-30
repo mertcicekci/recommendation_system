@@ -1,3 +1,5 @@
+"""This API queries and presents recommendations"""
+
 from flask import Flask, request, render_template
 import rec_main
 
