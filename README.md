@@ -68,7 +68,7 @@ Recommendations for a randomly generated cart page will appear on the browser sc
 
 Note: If you want to create your own cart page, you can write an address like below.
 
-http://127.0.0.1:5000/tables?id=["HBV00000LMKWX","HBV00000NG8KC"]
+http://127.0.0.1:5000/tables?id=["HBV00000NE158","ZYBICN9287642","HBV00000NFHUI"]
 
 HBV00000LMKWX and HBV00000NG8KC in the list are the product ids.
 
