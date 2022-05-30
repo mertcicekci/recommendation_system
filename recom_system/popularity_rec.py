@@ -1,7 +1,20 @@
+"""Popularity based recommendation system module"""
 from recom_system import *
 
 
 def calc_popularity(ftbl_meta, ftbl_events, fpath):
+    """
+    Date weighting is done according to the dates in the events data.
+    The total number of events of the products is calculated.
+    Then these total numbers are multiplied by the weighting values.
+    The most selected products in recent days are assumed to be more popular, thus generating popularity scores.
+
+    Args:
+        ftbl_meta (Pandas DataFrame): Meta DataFrame.
+        ftbl_events (Pandas DataFrame): Events DataFrame.
+        fpath (str): Output path.
+
+    """
     ftbl_events["time_weighting"] = pd.to_datetime(ftbl_events["eventtime"]).map(
         lambda x: x.year + x.month / 10
     )

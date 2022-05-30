@@ -1,3 +1,4 @@
+"""Collabrative recommendation system module"""
 from recom_system import *
 
 
@@ -8,6 +9,21 @@ class collaborative_result(object):
 
 
 def calc_collaborative_rec(ftbl_meta, ftbl_events, fpath):
+    """
+    In this method, the cart page of other sessions that match the products is examined.
+    The products selected by each session during the day were assumed to be the cart page.
+    The products selected together on the previous cart pages are matched.
+    Thus, recommendations are presented to the new cart pages, which are similar to the choices of other users.
+    In fact, we can say that it is a cart page-based recommendation method.
+    People's cart pages will help other people buy products.
+
+    Args:
+        ftbl_meta (Pandas DataFrame): Meta DataFrame.
+        ftbl_events (Pandas DataFrame): Events DataFrame.
+        fpath (str): Output path.
+
+    """
+
     data = ftbl_meta.merge(ftbl_events, on="productid")
     data = data[["sessionid", "productid", "event", "eventtime"]]
 
@@ -38,7 +54,16 @@ def calc_collaborative_rec(ftbl_meta, ftbl_events, fpath):
 
 
 def get_collaborative_rec(fres_object, fcart_list):
+    """
+    A recommendation table is created from the trained data.
 
+    Args:
+        fres_object (class): Class of trained data
+        fcart_list (List): List of products.
+
+    Returns:
+        res_session (Pandas DataFrame): Collaborative recommendations table.
+    """
     res = pd.DataFrame()
     for product in fcart_list:
         session_series = pd.Series(fres_object.productid)

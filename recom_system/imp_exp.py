@@ -1,19 +1,26 @@
+"""This module is for import and export operations."""
 from recom_system import *
 
 
 def raw_data_importer(path):
-
-    # .json uzantılı dosyaları okuyoruz ve Pandas dataframe e dönüşütürüyoruz.
+    """
+    This function reads raw data and stop words.
+    Args:
+        path (str): Path of data.
+    Returns:
+        res (dict): Dictionary of all data
+    """
+    # Reading .json files and converting them to Pandas dataframe
     meta_json = open(f"{path}/meta.json", encoding="utf8")
     events_json = open(f"{path}/events.json", encoding="utf8")
     events_df = pd.DataFrame(json.load(events_json)["events"])
     meta_df = pd.DataFrame(json.load(meta_json)["meta"])
 
-    # missing veriler uçuruluyor ya da değiştiriliyor.
+    # missing control and manipulate or delete
     events_df.dropna(subset=["sessionid", "eventtime", "productid"], inplace=True)
     meta_df.dropna(subset=["name", "productid"], inplace=True)
     meta_df.fillna("", inplace=True)
-    # stopwords okunuyor.
+    # read stop words.
     with open(f"{path}/stopwords.txt", "r", encoding="cp1254") as f:
         stop_words = f.read().split()
     events_json.close()
@@ -29,7 +36,13 @@ def raw_data_importer(path):
 
 
 def exporter(ffile, fpath, file_type):
-
+    """
+    This function writes data to database.
+    Args:
+        ffile (class or Pandas Dataframe): Data to be written out.
+        fpath (str): Output path.
+        file_type (str): File type.
+    """
     if not os.path.exists(fpath):
         os.makedirs(fpath)
     if file_type == "pickle":
@@ -40,7 +53,11 @@ def exporter(ffile, fpath, file_type):
 
 
 def res_importer(fpath):
-
+    """
+    This function reads data from database.
+    Args:
+        fpath (str): Database path.
+    """
     file_list = os.listdir(fpath)
     res = {}
     for file in file_list:

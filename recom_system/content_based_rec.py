@@ -1,3 +1,4 @@
+"""Content based recommendation system module"""
 from recom_system import *
 
 
@@ -9,6 +10,15 @@ class content_result(object):
 
 
 def calc_content_rec(ftbl, stop_words, fpath):
+    """
+    Calculates the number of days or the date for TermCds.
+
+    Args:
+        ftbl_meta (Pandas DataFrame): Meta DataFrame.
+        stop_words (List): Stop words list.
+        fpath (str): Output path.
+
+    """
     # also remove @,%,#, and other special characters
     ftbl["brand"] = ftbl["brand"].apply(lambda x: re.sub(r"[^\w\s]", "", x.lower()))
     ftbl["category"] = ftbl["category"].apply(
@@ -39,6 +49,17 @@ def calc_content_rec(ftbl, stop_words, fpath):
 
 
 def get_content_rec(fres_object, fcart_list, weight_dict):
+    """
+    A recommendation table is created from the trained data.
+
+    Args:
+        fres_object (class): Class of trained data
+        fcart_list (List): List of products.
+        weight_dict (dict): Dictionary of weighting parameters.
+    Returns:
+        res_content (Pandas DataFrame): content-based recommendations table.
+    """
+
     weighted_similarity = (
         weight_dict["count"] * fres_object.cosine_sim_text_combine
         + weight_dict["tfidf"] * fres_object.cosine_sim_name
