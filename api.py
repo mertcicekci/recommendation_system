@@ -13,7 +13,7 @@ def result_tables():
     else:
         productid_list = None
 
-    data = rec_main.hayde(product_ids=productid_list)
+    data = rec_main.rec_proc(product_ids=productid_list)
     return render_template(
         "view.html",
         tables=[
