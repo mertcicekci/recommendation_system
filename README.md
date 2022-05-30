@@ -64,7 +64,7 @@ This process can take up to 30 seconds.
 
 
 Recommendations for a randomly generated cart page will appear on the browser screen.
-
+![exp_ss](https://user-images.githubusercontent.com/106500758/170994387-81bee443-dab1-4045-b40c-f319e0657f1b.png)
 
 Note: If you want to create your own cart page, you can write an address like below.
 
