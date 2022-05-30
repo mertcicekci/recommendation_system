@@ -12,29 +12,36 @@ def random_products(productid_list):
     return res
 
 
-def hayde(product_ids=None):
+def db_control(path):
+    if os.path.exists(path):
+        if len(os.listdir(path)) == 3:
+            return False
+    return True
+
+
+def rec_proc(product_ids=None):
     # datalar İmport ediliyor
 
-    if not os.path.exists(settings.db_path):
-        if not os.listdir(settings.db_path):
-            data = imp_exp.raw_data_importer(path=settings.data_path)
-            # Popularity hesaplaması
-            popularity_rec.calc_popularity(
-                ftbl_meta=data["meta_df"].copy(),
-                ftbl_events=data["events_df"].copy(),
-                fpath=settings.db_path,
-            )
-            content_based_rec.calc_content_rec(
-                ftbl=data["meta_df"].copy(),
-                stop_words=data["stop_words"],
-                fpath=settings.db_path,
-            )
-            collaborative_rec.calc_collaborative_rec(
-                ftbl_meta=data["meta_df"].copy(),
-                ftbl_events=data["events_df"].copy(),
-                fpath=settings.db_path,
-            )
-            del data
+    if db_control(path=settings.db_path):
+        
+        data = imp_exp.raw_data_importer(path=settings.data_path)
+        # Popularity hesaplaması
+        popularity_rec.calc_popularity(
+            ftbl_meta=data["meta_df"].copy(),
+            ftbl_events=data["events_df"].copy(),
+            fpath=settings.db_path,
+        )
+        content_based_rec.calc_content_rec(
+            ftbl=data["meta_df"].copy(),
+            stop_words=data["stop_words"],
+            fpath=settings.db_path,
+        )
+        collaborative_rec.calc_collaborative_rec(
+            ftbl_meta=data["meta_df"].copy(),
+            ftbl_events=data["events_df"].copy(),
+            fpath=settings.db_path,
+        )
+        del data
 
     data = imp_exp.res_importer(fpath=settings.db_path)
 
