@@ -23,8 +23,9 @@ These matrices were then aggregated with the weighting parameters.
 In this method, the cart page of other sessions that match the products is examined.
 The products selected by each session during the day were assumed to be the cart page.
 The products selected together on the previous cart pages are matched.
-In fact, we can say that it is a cart page-based recommendation method.
 Thus, recommendations are presented to the new cart pages, which are similar to the choices of other users.
+In fact, we can say that it is a cart page-based recommendation method.
+People's cart pages will help other people buy products.
 
 ## Popularity Based
 
@@ -38,4 +39,36 @@ The most selected products in recent days are assumed to be more popular, thus g
 After weighting the results of all these approaches(Content-Based,Collaborative,Popularity), the final recommendations are reached.
 
 # User Guide
+
+
+Meta and event data should be put in the data folder in the main directory or the path should be defined with settings.py.
+
+Api.py must be run.
+
+
+It is ready to use when the text below appears.
+
+Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+
+
+Let's Try
+
+
+The program runs when you go to the address below in your browser.
+
+ http://127.0.0.1:5000/tables
+
+
+If the program is run for the first time, it extracts the necessary files to the db folder.
+This process can take up to 30 seconds.
+
+
+Recommendations for a randomly generated cart page will appear on the browser screen.
+
+
+Note: If you want to create your own cart page, you can write an address like below.
+
+http://127.0.0.1:5000/tables?id=["HBV00000LMKWX","HBV00000NG8KC"]
+
+HBV00000LMKWX and HBV00000NG8KC in the list are the product ids.
 
