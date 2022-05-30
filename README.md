@@ -73,4 +73,5 @@ http://127.0.0.1:5000/tables?id=["HBV00000NE158","ZYBICN9287642","HBV00000NFHUI"
 HBV00000LMKWX and HBV00000NG8KC in the list are the product ids.
 
 Cons:
-  - There are 5 weighting parameters in the program.For the best results, they need to be optimized. A test script that will provide optimization is written. Unfortunately, this part of the project could not be completed in the given time.
+  - There are 5 weighting parameters in the program. For the best results, they need to be optimized. A test script that will provide optimization is written. Unfortunately, this part of the project could not be completed in the given time.
+  - It can be ensured to work faster by revising some parts.
